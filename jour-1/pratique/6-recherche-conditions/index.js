@@ -48,6 +48,7 @@ const findByType = db.movies.find({
 });
 
 // recherche avec une regex
+// George Lucas n'a pas réalisé Star wars 5 et 6, ça me semblait important de le mettre là
 const s = db.movies
   .find({
     title: /.*Star wars.*/i,
@@ -60,4 +61,15 @@ const s = db.movies
     year: 1,
   });
 
-printjson(s.toArray());
+const ss = db.movies.find({
+  // votre where doit retourner un booléen (true/false)
+  // ATTENTION, peut-être très lent en fonction du nombre de documents
+  $where: function () {
+    return this.title.includes("Star Wars");
+  },
+});
+
+// renvoie le nombre de résultats trouvés
+const count = db.movies.find({ title: /.*Star wars.*/i }).length();
+
+print("Nombre de films : " + count);
