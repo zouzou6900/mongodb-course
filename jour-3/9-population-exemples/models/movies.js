@@ -48,6 +48,7 @@ const movieSchema = new mongoose.Schema(
   },
   {
     toObject: { virtuals: true },
+    toJSON: { virtuals: true },
   }
 );
 
