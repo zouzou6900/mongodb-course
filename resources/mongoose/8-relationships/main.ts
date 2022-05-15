@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import { ArticleModel } from "./article";
-import { CommentModel } from "./comment";
+import "./comment";
 
 async function init() {
   	// mongo connection string
+    mongoose.set("debug",true);
     try {
 	    const conn = await mongoose.connect('mongodb://root:test123*@localhost:27017/blog?authSource=admin');
         console.log("Connected to", conn.connection.db.databaseName);
@@ -11,33 +12,26 @@ async function init() {
         console.error("Failed to connect to server");
     }
 
-    // const article = new ArticleModel(
-    //     {
-    //         author: "Amaury",
-    //         title: "How to kill your  students",
-    //         body: "BABY SHARK TUDUDUDDUDU"
-    //     }
-    // );
-    // await article.save();
+    // let article = new ArticleModel({
+    //     title: "Le réseau pour les nulls 3",
+    //     body: "Irure exercitation deserunt dolor nostrud quis sit Lorem ullamco culpa.",
+    //     author: "Mister Mandoux",
+    //   });
+    
+    //   try {
+    //     await article.save();
+    //   } catch (e) {
+    //     console.error("Une erreur est survenue lors de la sauvegarde de l'article", (e as Error).message);
+    //   }
 
-    // const comment1 = new CommentModel({
-    //     content: "hello",
+    //   let newComment = new CommentModel({
+    //     content: "Bonjour",
     //     article
-    // });
-    // const comment2 = new CommentModel({
-    //     content: "Hey !",
-    //     article
-    // });
+    //   });
+    //   await newComment.save();
 
-    // await comment1.save();
-    // await comment2.save();
-
-    // find all blogs
-    const blogs = await CommentModel.find({
-        
-    });
-
-    console.log(blogs);
+    const articlesWithComments = await ArticleModel.find().populate("comments");
+    console.log(articlesWithComments);
 }
 
 init();

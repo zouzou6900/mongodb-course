@@ -1,11 +1,11 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
 
 interface IArticle {
   title: string;
   author: string;
   body: string;
   date: Date;
-  comments: IComment[];
+  comments: Types.ArraySubdocument<IComment>;
 }
 
 interface IComment {
