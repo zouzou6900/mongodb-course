@@ -76,7 +76,7 @@ articleSchema
     return `${this.title} - ${this.author}`;
   });
 
-export const ArticleModel = model<IArticle, ArticleModel>(
+export const ArticleModel = model<IArticle>(
   "article",
   articleSchema
 );

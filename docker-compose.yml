@@ -3,7 +3,7 @@ name: 'mongo'
 
 services:
   mongo:
-    image: mongo
+    image: mongo:5
     volumes: 
       - type: bind
         source: "./workspace"

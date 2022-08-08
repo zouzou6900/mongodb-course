@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import "./article";
-import { ArticleModel } from "./article";
+import { ArticleModel, IArticle } from "./article";
 
 async function init() {
   // mongo connection string
