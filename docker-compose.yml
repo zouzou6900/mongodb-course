@@ -3,14 +3,18 @@ name: 'mongo'
 
 services:
   mongo:
-    image: mongo:5
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes: 
       - type: bind
         source: "./workspace"
         target:  "/workspace"
+      - ./init.sh:/docker-entrypoint-initdb.d/init.sh:ro
     container_name: 'mongo-db'
     ports:
       - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: test123*
+      MONGO_INITDB_DATABASE: test
